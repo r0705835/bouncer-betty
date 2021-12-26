@@ -9,11 +9,9 @@ export const onInteractionCreate = async (client: ExtendedClient, interaction: I
         client.commands.get(commandName).run(interaction);
     } catch (error) {
         console.log(error);
-        return interaction.reply( {
+        return interaction.reply({
             content: "There was an error while executing this command!",
             ephemeral: true
         });
     }
-
-
 }

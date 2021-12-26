@@ -16,4 +16,3 @@ function registerCommands(client: ExtendedClient): void {
         body: commands
     });
 }
-
