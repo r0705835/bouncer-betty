@@ -3,7 +3,7 @@ import { CommandInt } from "../model/CommandInt";
 
 export const ping: CommandInt = {
     name: "ping",
-    description: "description",
+    description: "Sends pong back.",
     run: async (interaction: CommandInteraction) => {
         interaction.reply({
             content: "pong!",
