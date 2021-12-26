@@ -1,0 +1,41 @@
+{
+  "name": "bouncer-betty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "tsc",
+    "dev": "nodemon ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r0705835/bouncer-betty.git"
+  },
+  "author": "Neto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r0705835/bouncer-betty/issues"
+  },
+  "homepage": "https://github.com/r0705835/bouncer-betty#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.0",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0"
+  },
+  "engines": {
+    "node": "17.1.0",
+    "npm": "8.1.2"
+  }
+}
