@@ -24,10 +24,11 @@ This application uses specific versions of certain modules and software. Unexpec
 You can run your own instance of Bouncer betty by following these steps.
 
 1. Clone the repository: ``` git clone <https://github.com/r0705835/mimi.git> ```
-2. Build the application ```npm run build```
-3. Set up your own bot application <https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot>
-4. Create a .env file based on the .env_template and fill in the variables
-5. Run the application ```npm run start```
+2. Install the necessary dependencies ```npm install```
+3. Build the application ```npm run build```
+4. Set up your own bot application <https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot>
+5. Create a .env file based on the .env_template and fill in the variables
+6. Run the application ```npm start```
 
 ## Support
 
