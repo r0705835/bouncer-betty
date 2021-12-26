@@ -30,6 +30,13 @@ You can run your own instance of Bouncer betty by following these steps.
 5. Create a .env file based on the .env_template and fill in the variables
 6. Run the application ```npm start```
 
+### Docker
+
+Docker containers can be created by executing the following commands.
+
+- ```docker build -t bouncer-betty .```
+- ```docker run -d bouncer-betty```
+
 ## Support
 
 one day you'll be able to buy me a coffee!
