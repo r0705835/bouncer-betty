@@ -37,6 +37,16 @@ Docker containers can be created by executing the following commands.
 - ```docker build -t bouncer-betty .```
 - ```docker run -d bouncer-betty```
 
+#### Using Dockerhub with server linux/arm/v7 as server platform
+
+- ```docker buildx build --platform linux/arm/v7 -t mimi .```
+- ```docker push [username]/bouncer-betty```
+
+#### Move docker container by file
+
+- On the host: ```docker save bouncer_betty -o bouncer_betty.tar```
+- On the server after file transfer: ```docker load -i file.tar```
+
 ## Support
 
 one day you'll be able to buy me a coffee!
