@@ -15,7 +15,7 @@ export const announcement: CommandInt = {
         const messageEmbed = new MessageEmbed()
             .setTitle("Receive announcements!")
             .setColor("#fea5c3");
-        messageEmbed.setDescription("@everyone this will be the last time we will tag everyone. From now on you can easily opt-in (or out) of notifications. Simply click the button below if you wish to receive them.")
+        messageEmbed.setDescription("We're not a fan of @everyone so here's an alternative. You can now easily opt-in (or out) of notifications by simply clicking the toggle button below.")
         interaction.channel.send({
             embeds: [messageEmbed],
             components: [actionRow]

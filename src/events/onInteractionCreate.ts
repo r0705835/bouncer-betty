@@ -1,4 +1,4 @@
-import { ButtonInteraction, Interaction } from "discord.js";
+import { ButtonInteraction, GuildMember, Interaction, Role } from "discord.js";
 import { ExtendedClient } from "../model/ExtendedClient";
 
 export const onInteractionCreate = async (client: ExtendedClient, interaction: Interaction) => {
@@ -23,10 +23,21 @@ export const onInteractionCreate = async (client: ExtendedClient, interaction: I
     }
 }
 
-function announcementToggle(interaction: ButtonInteraction): void {
-    interaction
-    interaction.reply({
-        content: "You've done it!",
-        ephemeral: true
-    });
+async function announcementToggle(interaction: ButtonInteraction): Promise<void> {
+    const member: GuildMember = interaction.member as GuildMember;
+    const announcementRole: Role = member.roles.cache.find(role => role.name == "announcement")
+    if (announcementRole) {
+        await member.roles.remove(announcementRole);
+        await interaction.reply({
+            content: "You will no longer receive announcements!",
+            ephemeral: true
+        })
+    } else {
+        const roleToAdd = member.guild.roles.cache.find(role => role.name == "announcement");
+        await member.roles.add(roleToAdd);
+        await interaction.reply({
+            content: "You will now receive announcements!",
+            ephemeral: true
+        })
+    }
 }
