@@ -1,16 +1,29 @@
-import { ButtonInteraction, GuildMember, Interaction, Role } from "discord.js";
+import { ButtonInteraction, CommandInteraction, GuildMember, Interaction, Role } from "discord.js";
 import { ExtendedClient } from "../model/ExtendedClient";
 
 export const onInteractionCreate = async (client: ExtendedClient, interaction: Interaction) => {
-    if (interaction.isButton) {
-        const buttonInteraction = interaction as ButtonInteraction;
-        if (buttonInteraction.customId == "announcement_toggle") {
-            announcementToggle(buttonInteraction)
+    if (interaction.isButton()) {
+        handleButtonInteraction(interaction as ButtonInteraction);
+
+    } else if (interaction.isCommand) {
+        handleCommandInteraction(client, interaction as CommandInteraction);
+    } else {
+        return;
+    }
+}
+
+function handleButtonInteraction(interaction: ButtonInteraction): void {
+    const buttonInteraction = interaction as ButtonInteraction;
+    if (buttonInteraction.customId == "announcement_toggle") {
+        try {
+            announcementToggle(buttonInteraction);
+        } catch (error) {
+            console.log(error);
         }
     }
+}
 
-    if (!interaction.isCommand()) return;
-
+function handleCommandInteraction(client: ExtendedClient, interaction: CommandInteraction): Promise<void> {
     try {
         const { commandName } = interaction;
         client.commands.get(commandName).run(interaction);
@@ -25,7 +38,7 @@ export const onInteractionCreate = async (client: ExtendedClient, interaction: I
 
 async function announcementToggle(interaction: ButtonInteraction): Promise<void> {
     const member: GuildMember = interaction.member as GuildMember;
-    const announcementRole: Role = member.roles.cache.find(role => role.name == "announcement")
+    const announcementRole: Role = member.roles.cache.find(role => role.name == "Announcement")
     if (announcementRole) {
         await member.roles.remove(announcementRole);
         await interaction.reply({
@@ -33,7 +46,7 @@ async function announcementToggle(interaction: ButtonInteraction): Promise<void>
             ephemeral: true
         })
     } else {
-        const roleToAdd = member.guild.roles.cache.find(role => role.name == "announcement");
+        const roleToAdd = member.guild.roles.cache.find(role => role.name == "Announcement");
         await member.roles.add(roleToAdd);
         await interaction.reply({
             content: "You will now receive announcements!",
