@@ -1,7 +1,14 @@
-import { Interaction } from "discord.js";
+import { ButtonInteraction, Interaction } from "discord.js";
 import { ExtendedClient } from "../model/ExtendedClient";
 
 export const onInteractionCreate = async (client: ExtendedClient, interaction: Interaction) => {
+    if (interaction.isButton) {
+        const buttonInteraction = interaction as ButtonInteraction;
+        if (buttonInteraction.customId == "announcement_toggle") {
+            announcementToggle(buttonInteraction)
+        }
+    }
+
     if (!interaction.isCommand()) return;
 
     try {
@@ -14,4 +21,12 @@ export const onInteractionCreate = async (client: ExtendedClient, interaction: I
             ephemeral: true
         });
     }
+}
+
+function announcementToggle(interaction: ButtonInteraction): void {
+    interaction
+    interaction.reply({
+        content: "You've done it!",
+        ephemeral: true
+    });
 }
