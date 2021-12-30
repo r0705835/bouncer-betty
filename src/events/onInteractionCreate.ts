@@ -2,38 +2,30 @@ import { ButtonInteraction, CommandInteraction, GuildMember, Interaction, Role }
 import { ExtendedClient } from "../model/ExtendedClient";
 
 export const onInteractionCreate = async (client: ExtendedClient, interaction: Interaction) => {
-    if (interaction.isButton()) {
-        handleButtonInteraction(interaction as ButtonInteraction);
+    try {
+        if (interaction.isButton()) {
+            handleButtonInteraction(interaction as ButtonInteraction);
 
-    } else if (interaction.isCommand) {
-        handleCommandInteraction(client, interaction as CommandInteraction);
-    } else {
-        return;
+        } else if (interaction.isCommand) {
+            handleCommandInteraction(client, interaction as CommandInteraction);
+        } else {
+            return;
+        }
+    } catch (error) {
+        console.error(error);
     }
 }
 
 function handleButtonInteraction(interaction: ButtonInteraction): void {
     const buttonInteraction = interaction as ButtonInteraction;
     if (buttonInteraction.customId == "announcement_toggle") {
-        try {
-            announcementToggle(buttonInteraction);
-        } catch (error) {
-            console.log(error);
-        }
+        announcementToggle(buttonInteraction);
     }
 }
 
-function handleCommandInteraction(client: ExtendedClient, interaction: CommandInteraction): Promise<void> {
-    try {
-        const { commandName } = interaction;
-        client.commands.get(commandName).run(interaction);
-    } catch (error) {
-        console.log(error);
-        return interaction.reply({
-            content: "There was an error while executing this command!",
-            ephemeral: true
-        });
-    }
+function handleCommandInteraction(client: ExtendedClient, interaction: CommandInteraction): void {
+    const { commandName } = interaction;
+    client.commands.get(commandName).run(interaction);
 }
 
 async function announcementToggle(interaction: ButtonInteraction): Promise<void> {
