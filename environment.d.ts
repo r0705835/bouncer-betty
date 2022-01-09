@@ -4,6 +4,7 @@ declare global {
             botToken: string;
             clientId: string;
             guildId: string;
+            mongoURI: string;
         }
     }
 }
