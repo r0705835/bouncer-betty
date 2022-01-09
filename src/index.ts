@@ -1,5 +1,5 @@
 import { Intents } from "discord.js";
-import { connectDatabase } from "./database/models/connectDatabase";
+import { connectDatabase } from "./database/connectDatabase";
 import { ExtendedClient } from "./model/ExtendedClient";
 require("dotenv").config();
 
