@@ -1,11 +1,17 @@
-import { ButtonInteraction, GuildMember, Interaction, Role } from "discord.js";
+import { ButtonInteraction, Guild, GuildMember, Interaction, Role } from "discord.js";
+import { manageMemberData } from "../database/manageMemberData";
 import { ExtendedClient } from "../model/ExtendedClient";
 
 export const onInteractionCreate = async (client: ExtendedClient, interaction: Interaction) => {
+    if(interaction.member instanceof GuildMember) {
+        manageMemberData(interaction.member);
+    }
+    
     if (interaction.isButton) {
         const buttonInteraction = interaction as ButtonInteraction;
+
         if (buttonInteraction.customId == "announcement_toggle") {
-            announcementToggle(buttonInteraction)
+            announcementToggle(buttonInteraction);
         }
     }
 
