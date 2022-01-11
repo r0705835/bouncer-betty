@@ -10,6 +10,7 @@ export const manageMemberData = async (member: GuildMember) => {
                 guildId: member.guild.id,
                 username: member.user.username,
             });
+            console.log("Added user " + member.user.username + " to the database.")
         }
     } catch (error) {
         console.error('Something went wrong with managing the activity of the user: ', error);
