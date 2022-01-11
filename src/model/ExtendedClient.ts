@@ -1,5 +1,6 @@
 import { BitFieldResolvable, Client, Collection, IntentsString } from "discord.js";
 import { announcement } from "../commands/announcement";
+import { inactivity } from "../commands/inactivity";
 import { ping } from "../commands/ping";
 import { onceReady } from "../events/onceReady";
 import { onInteractionCreate } from "../events/onInteractionCreate";
@@ -25,6 +26,7 @@ export class ExtendedClient extends Client {
     private addCommands(): void {
         this.commands.set(ping.name, ping);
         this.commands.set(announcement.name, announcement);
+        this.commands.set(inactivity.name, inactivity);
     }
 
     private eventsListener(): void {

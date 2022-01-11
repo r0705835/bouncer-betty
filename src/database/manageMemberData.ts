@@ -9,6 +9,7 @@ export const manageMemberData = async (member: GuildMember) => {
                 discordId: member.id,
                 guildId: member.guild.id,
                 username: member.user.username,
+                tag: member.user.tag
             });
             console.log("Added user " + member.user.username + " to the database.")
         }
