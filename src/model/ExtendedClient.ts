@@ -4,6 +4,7 @@ import { ping } from "../commands/ping";
 import { onceReady } from "../events/onceReady";
 import { onInteractionCreate } from "../events/onInteractionCreate";
 import { onMessageCreate } from "../events/onMessageCreate";
+import { onVoiceStateUpdate } from "../events/onVoiceStateUpdate";
 import { CommandInt } from "./CommandInt";
 
 export class ExtendedClient extends Client {
@@ -30,5 +31,6 @@ export class ExtendedClient extends Client {
         this.once("ready", async () => onceReady(this));
         this.on("interactionCreate", async interaction => onInteractionCreate(this, interaction));
         this.on("messageCreate", async message => onMessageCreate(message));
+        this.on("voiceStateUpdate", async(oldState, newState) => onVoiceStateUpdate(oldState, newState));
     }
 }
