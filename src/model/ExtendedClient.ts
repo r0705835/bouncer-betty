@@ -3,7 +3,7 @@ import { announcement } from "../commands/announcement";
 import { ping } from "../commands/ping";
 import { onceReady } from "../events/onceReady";
 import { onInteractionCreate } from "../events/onInteractionCreate";
-import { onMessage } from "../events/onMessage";
+import { onMessageCreate } from "../events/onMessageCreate";
 import { CommandInt } from "./CommandInt";
 
 export class ExtendedClient extends Client {
@@ -29,6 +29,6 @@ export class ExtendedClient extends Client {
     private eventsListener(): void {
         this.once("ready", async () => onceReady(this));
         this.on("interactionCreate", async interaction => onInteractionCreate(this, interaction));
-        this.on("message", async message => onMessage(message));
+        this.on("messageCreate", async message => onMessageCreate(message));
     }
 }
