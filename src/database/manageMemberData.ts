@@ -14,7 +14,7 @@ export const manageMemberData = async (member: GuildMember) => {
             });
             console.log("Added user " + member.user.username + " to the database.")
         } else {
-            targetMemberData.update({
+            await targetMemberData.updateOne({
                 lastActivity: Date.now()
             });
         }
