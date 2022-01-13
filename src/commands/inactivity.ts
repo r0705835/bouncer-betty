@@ -1,5 +1,6 @@
-import { CommandInteraction } from "discord.js";
+import { CommandInteraction, MessageEmbed } from "discord.js";
 import { getMemberData } from "../database/getMemberData";
+import { MemberInt } from "../database/models/MemberModel";
 import { CommandInt } from "../model/CommandInt";
 
 export const inactivity: CommandInt = {
@@ -9,12 +10,25 @@ export const inactivity: CommandInt = {
         await interaction.deferReply({
             ephemeral: true
         });
-        const members = await getMemberData(interaction.guild.id);
-        console.log(members);
-        const names: string = members.map(member => member.tag).toString();
+        const members: MemberInt[] = await getMemberData(interaction.guild.id);
+        const messageEmbed = createMessage(members);
+        await interaction.channel.send({
+            embeds: [messageEmbed]
+        });
         await interaction.editReply({
-            content: names
+            content: "You should have received the activity."
         });
     }
 }
 
+function createMessage(members: MemberInt[]): MessageEmbed {
+    const messageEmbed = new MessageEmbed()
+            .setTitle("Member activity")
+            .setColor("#fea5c3");
+    let description = "";
+    members.forEach(member => {
+        description += member.tag + " lastActivity: " + member.lastActivity + "\n";
+    });
+        messageEmbed.setDescription(description);
+        return messageEmbed;
+}

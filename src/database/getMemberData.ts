@@ -1,5 +1,5 @@
-import MemberModel from "./models/MemberModel";
+import MemberModel, { MemberInt } from "./models/MemberModel";
 
-export async function getMemberData(guildId: string){
+export async function getMemberData(guildId: string): Promise<MemberInt[]>{
     return await MemberModel.find({'guildId': guildId});
 }
