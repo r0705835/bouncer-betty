@@ -9,9 +9,14 @@ export const manageMemberData = async (member: GuildMember) => {
                 discordId: member.id,
                 guildId: member.guild.id,
                 username: member.user.username,
-                tag: member.user.tag
+                tag: member.user.tag,
+                lastActivity: Date.now()
             });
             console.log("Added user " + member.user.username + " to the database.")
+        } else {
+            targetMemberData.update({
+                lastActivity: Date.now()
+            });
         }
     } catch (error) {
         console.error('Something went wrong with managing the activity of the user: ', error);

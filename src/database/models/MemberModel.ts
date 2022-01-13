@@ -5,6 +5,7 @@ export interface MemberInt extends Document {
     guildId: string;
     username: string;
     tag: string;
+    lastActivity: Date;
 };
 
 export const Member = new Schema({
@@ -12,6 +13,7 @@ export const Member = new Schema({
     guildId: String,
     username: String,
     tag: String,
+    lastActivity: Date,
 });
 
 export default model<MemberInt>("member", Member);
