@@ -31,7 +31,7 @@ export const onInteractionCreate = async (client: ExtendedClient, interaction: I
 
 async function announcementToggle(interaction: ButtonInteraction): Promise<void> {
     const member: GuildMember = interaction.member as GuildMember;
-    const announcementRole: Role = member.roles.cache.find(role => role.name == "announcement")
+    const announcementRole: Role = member.roles.cache.find(role => role.name == "Announcement")
     if (announcementRole) {
         await member.roles.remove(announcementRole);
         await interaction.reply({
@@ -39,7 +39,7 @@ async function announcementToggle(interaction: ButtonInteraction): Promise<void>
             ephemeral: true
         })
     } else {
-        const roleToAdd = member.guild.roles.cache.find(role => role.name == "announcement");
+        const roleToAdd = member.guild.roles.cache.find(role => role.name == "Announcement");
         await member.roles.add(roleToAdd);
         await interaction.reply({
             content: "You will now receive announcements!",
