@@ -12,7 +12,7 @@ export class CommandBuilderAdapter {
                     option.setName(numberOption.name)
                         .setDescription(numberOption.description)
                         .setRequired(numberOption.required)
-                )
+                );
             });
         }
         return slashCommand;
