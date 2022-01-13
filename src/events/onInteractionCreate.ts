@@ -1,4 +1,4 @@
-import { ButtonInteraction, Guild, GuildMember, Interaction, Role } from "discord.js";
+import { ButtonInteraction, CommandInteraction, GuildMember, Interaction, Role } from "discord.js";
 import { manageMemberData } from "../database/manageMemberData";
 import { ExtendedClient } from "../model/ExtendedClient";
 
@@ -6,27 +6,30 @@ export const onInteractionCreate = async (client: ExtendedClient, interaction: I
     if(interaction.member instanceof GuildMember) {
         manageMemberData(interaction.member);
     }
-    
-    if (interaction.isButton) {
-        const buttonInteraction = interaction as ButtonInteraction;
-
-        if (buttonInteraction.customId == "announcement_toggle") {
-            announcementToggle(buttonInteraction);
-        }
-    }
-
-    if (!interaction.isCommand()) return;
-
     try {
-        const { commandName } = interaction;
-        client.commands.get(commandName).run(interaction);
+        if (interaction.isButton()) {
+            handleButtonInteraction(interaction as ButtonInteraction);
+
+        } else if (interaction.isCommand) {
+            handleCommandInteraction(client, interaction as CommandInteraction);
+        } else {
+            return;
+        }
     } catch (error) {
-        console.log(error);
-        return interaction.reply({
-            content: "There was an error while executing this command!",
-            ephemeral: true
-        });
+        console.error(error);
     }
+}
+
+function handleButtonInteraction(interaction: ButtonInteraction): void {
+    const buttonInteraction = interaction as ButtonInteraction;
+    if (buttonInteraction.customId == "announcement_toggle") {
+        announcementToggle(buttonInteraction);
+    }
+}
+
+function handleCommandInteraction(client: ExtendedClient, interaction: CommandInteraction): void {
+    const { commandName } = interaction;
+    client.commands.get(commandName).run(interaction);
 }
 
 async function announcementToggle(interaction: ButtonInteraction): Promise<void> {

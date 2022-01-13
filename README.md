@@ -39,7 +39,7 @@ Docker containers can be created by executing the following commands.
 
 #### Using Dockerhub with server linux/arm/v7 as server platform
 
-- ```docker buildx build --platform linux/arm/v7 -t mimi .```
+- ```docker buildx build --platform linux/arm/v7 -t bouncer-betty .```
 - ```docker push [username]/bouncer-betty```
 
 #### Move docker container by file
