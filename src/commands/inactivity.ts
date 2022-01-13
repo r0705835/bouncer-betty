@@ -5,7 +5,7 @@ import { CommandInt } from "../model/CommandInt";
 
 export const inactivity: CommandInt = {
     name: "inactivity",
-    description: "Returns a list of inactive users",
+    description: "Returns a list of inactive users. The default inactive time is 30 days.",
     run: async (interaction: CommandInteraction) => {
         await interaction.deferReply({
             ephemeral: true
@@ -17,9 +17,7 @@ export const inactivity: CommandInt = {
                 embeds: [embed]
             });
         });
-        await interaction.channel.send({
-            embeds: messageEmbeds,
-        });
+        
         await interaction.editReply({
             content: "You should have received the activity."
         });
