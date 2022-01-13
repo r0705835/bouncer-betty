@@ -31,7 +31,6 @@ export const inactivity: CommandInt = {
         const filteredMembers = members.filter(member => {
             return member.lastActivity.valueOf() < inactivityDate.valueOf();
         });
-        console.log("Filtered size: " + filteredMembers.length);
         const messageEmbeds = createMessages(filteredMembers);
         messageEmbeds.forEach(async embed => {
             await interaction.channel.send({
