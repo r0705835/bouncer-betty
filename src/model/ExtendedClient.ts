@@ -7,6 +7,7 @@ import { onGuildCreate } from "../events/onGuildCreate";
 import { onGuildMemberAdd } from "../events/onGuildMemberAdd";
 import { onInteractionCreate } from "../events/onInteractionCreate";
 import { onMessageCreate } from "../events/onMessageCreate";
+import { onUserUpdate } from "../events/onUserUpdate";
 import { onVoiceStateUpdate } from "../events/onVoiceStateUpdate";
 import { CommandInt } from "./CommandInt";
 
@@ -37,6 +38,7 @@ export class ExtendedClient extends Client {
         this.on("messageCreate", async message => onMessageCreate(message));
         this.on("voiceStateUpdate", async(oldState, newState) => onVoiceStateUpdate(oldState, newState));
         this.on("guildCreate", async (guild) => onGuildCreate(guild));
-        this.on("guildMemberAdd", async (GuildMember) => onGuildMemberAdd(GuildMember));
+        this.on("guildMemberAdd", async (guildMember) => onGuildMemberAdd(guildMember));
+        this.on("userUpdate", async (oldUser, newUser) => onUserUpdate(oldUser, newUser));
     }
 }
