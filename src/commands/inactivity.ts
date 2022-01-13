@@ -11,7 +11,16 @@ export const inactivity: CommandInt = {
             ephemeral: true
         });
         const members: MemberInt[] = await getMemberData(interaction.guild.id);
-        const messageEmbeds = createMessages(members);
+        const today = Date.now();
+        let yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate()-1);
+        console.log("Start date: " + yesterday);
+        console.log("Current date " + members[0].lastActivity.valueOf());
+        const filteredMembers = members.filter(member => {
+            return member.lastActivity.valueOf() < yesterday.valueOf();
+        });
+        console.log("Filtered size: " + filteredMembers.length);
+        const messageEmbeds = createMessages(filteredMembers);
         messageEmbeds.forEach(async embed => {
             await interaction.channel.send({
                 embeds: [embed]
