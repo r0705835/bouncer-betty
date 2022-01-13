@@ -4,6 +4,7 @@ import { inactivity } from "../commands/inactivity";
 import { ping } from "../commands/ping";
 import { onceReady } from "../events/onceReady";
 import { onGuildCreate } from "../events/onGuildCreate";
+import { onGuildMemberAdd } from "../events/onGuildMemberAdd";
 import { onInteractionCreate } from "../events/onInteractionCreate";
 import { onMessageCreate } from "../events/onMessageCreate";
 import { onVoiceStateUpdate } from "../events/onVoiceStateUpdate";
@@ -36,5 +37,6 @@ export class ExtendedClient extends Client {
         this.on("messageCreate", async message => onMessageCreate(message));
         this.on("voiceStateUpdate", async(oldState, newState) => onVoiceStateUpdate(oldState, newState));
         this.on("guildCreate", async (guild) => onGuildCreate(guild));
+        this.on("guildMemberAdd", async (GuildMember) => onGuildMemberAdd(GuildMember));
     }
 }
