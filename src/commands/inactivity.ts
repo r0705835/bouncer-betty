@@ -2,10 +2,14 @@ import { CommandInteraction, MessageEmbed, Util } from "discord.js";
 import { getMemberData } from "../database/getMemberData";
 import { MemberInt } from "../database/models/MemberModel";
 import { CommandInt } from "../model/CommandInt";
+import { IntegerOptions } from "../model/IntegerOption";
+
+const integerOption: IntegerOptions = new IntegerOptions("days", "The amount of days to look back for inactivity", false);
 
 export const inactivity: CommandInt = {
     name: "inactivity",
     description: "Returns a list of inactive users. The default inactive time is 30 days.",
+    integerOptions: [integerOption],
     run: async (interaction: CommandInteraction) => {
         await interaction.deferReply({
             ephemeral: true
