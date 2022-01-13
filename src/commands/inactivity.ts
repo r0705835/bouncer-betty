@@ -12,12 +12,10 @@ export const inactivity: CommandInt = {
         });
         const members: MemberInt[] = await getMemberData(interaction.guild.id);
         const today = Date.now();
-        let yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate()-1);
-        console.log("Start date: " + yesterday);
-        console.log("Current date " + members[0].lastActivity.valueOf());
+        let inactivityDate = new Date(today);
+        inactivityDate.setMonth(inactivityDate.getMonth() - 1);
         const filteredMembers = members.filter(member => {
-            return member.lastActivity.valueOf() < yesterday.valueOf();
+            return member.lastActivity.valueOf() < inactivityDate.valueOf();
         });
         console.log("Filtered size: " + filteredMembers.length);
         const messageEmbeds = createMessages(filteredMembers);
