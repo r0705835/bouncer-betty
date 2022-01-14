@@ -17,7 +17,7 @@ export const inactivity: CommandInt = {
         const members: MemberInt[] = await getMemberData(interaction.guild.id);
         const today = Date.now();
         let inactivityDate = new Date(today);
-        if (interaction.options.getInteger("days")) {
+        if (interaction.options.getInteger("days") == 0) {
             if(interaction.options.getInteger("days") < 0){
                 await interaction.editReply({
                     content: "Interaction failed, please enter a positive amount of days"
@@ -29,7 +29,8 @@ export const inactivity: CommandInt = {
             inactivityDate.setMonth(inactivityDate.getMonth() - 1);
         }
         const filteredMembers = members.filter(member => {
-            return member.lastActivity.valueOf() < inactivityDate.valueOf();
+            return member.lastActivity.valueOf() <= inactivityDate.valueOf();
+
         });
         const messageEmbeds = createMessages(filteredMembers);
         messageEmbeds.forEach(async embed => {
