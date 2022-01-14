@@ -1,5 +1,4 @@
 import { BitFieldResolvable, Client, Collection, IntentsString } from "discord.js";
-import { announcement } from "../commands/announcement";
 import { fill } from "../commands/fill";
 import { inactivity } from "../commands/inactivity";
 import { ping } from "../commands/ping";
@@ -29,7 +28,6 @@ export class ExtendedClient extends Client {
 
     private addCommands(): void {
         this.commands.set(ping.name, ping);
-        this.commands.set(announcement.name, announcement);
         this.commands.set(inactivity.name, inactivity);
         this.commands.set(fill.name, fill);
     }
@@ -38,7 +36,7 @@ export class ExtendedClient extends Client {
         this.once("ready", async () => onceReady(this));
         this.on("interactionCreate", async interaction => onInteractionCreate(this, interaction));
         this.on("messageCreate", async message => onMessageCreate(message));
-        this.on("voiceStateUpdate", async(oldState, newState) => onVoiceStateUpdate(oldState, newState));
+        this.on("voiceStateUpdate", async (oldState, newState) => onVoiceStateUpdate(oldState, newState));
         this.on("guildCreate", async (guild) => onGuildCreate(guild));
         this.on("guildMemberAdd", async (guildMember) => onGuildMemberAdd(guildMember));
         this.on("userUpdate", async (oldUser, newUser) => onUserUpdate(oldUser, newUser));
