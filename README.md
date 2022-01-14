@@ -29,6 +29,7 @@ You can run your own instance of Bouncer betty by following these steps.
 4. Set up your own bot application <https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot>
 5. Create a .env file based on the .env_template and fill in the variables
 6. Run the application ```npm start```
+**.env value for local database:** mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000
 
 ### Docker
 
@@ -41,6 +42,7 @@ Docker containers can be created by executing the following commands.
 
 - ```docker buildx build --platform linux/arm/v7 -t bouncer-betty .```
 - ```docker push [username]/bouncer-betty```
+**env value for docker database:** mongodb://mongo:27017/bouncer-betty_mongodb
 
 #### Move docker container by file
 
